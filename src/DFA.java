@@ -3,46 +3,14 @@ import java.util.*;
 /**
  * Created by caroem on 17.04.16.
  */
-public class dfa {
-    public List<State> states = new ArrayList<>();
-    public List<Transition> transition = new ArrayList<>();
-    char inputToCharArray[];
-    State currentState;
-    State errorState;
-    List<State> finalStates = new ArrayList<>();
-    List<Character> alphabet = new ArrayList<>();
-    String input;
-
-    public class State {
-        public int state;
-        public boolean isFinal;
-        public boolean isInitial;
-
-        public State(int state, boolean isFinal, boolean isInitial) {
-            this.state = state;
-            this.isFinal = isFinal;
-            this.isInitial = isInitial;
-        }
-    }
-
-    public class Transition {
-        public char input;
-        public State source;
-        public State destination;
-
-        public Transition(int source, int destination, char input) {
-            this.input = input;
-
-            for(int i = 0; i < states.size(); i++) {
-                if((states.get(i).state == source)) {
-                    this.source = states.get(i);
-                }
-                if(states.get(i).state == destination) {
-                    this.destination = states.get(i);
-                }
-            }
-        }
-    }
+public class DFA {
+    private List<State> states = new ArrayList<>();
+    private List<Transition> transition = new ArrayList<>();
+    private char inputToCharArray[];
+    private State currentState;
+    private State errorState;
+    private List<State> finalStates = new ArrayList<>();
+    private List<Character> alphabet = new ArrayList<>();
 
     public void addState(int state, boolean isFinal, boolean isInitial) {
         State newState = new State(state, isFinal, isInitial);
@@ -53,9 +21,18 @@ public class dfa {
     }
 
     public void addTransition(int source, int destination, char input) {
-        Transition newTransition = new Transition(source, destination, input);
+        Transition newTransition = new Transition(getStateForTransition(source), getStateForTransition(destination), input);
         transition.add(newTransition);
         alphabet.add(input);
+    }
+
+    public State getStateForTransition(int state) {
+        for(int i = 0; i < states.size(); i++) {
+            if(states.get(i).state == state) {
+                return states.get(i);
+            }
+        }
+        return null;
     }
 
     public boolean readCharacters(char input) {
@@ -73,7 +50,7 @@ public class dfa {
         return false;
     }
 
-    public boolean acceptInput() {
+    public boolean acceptInput(String input) {
         inputToCharArray = new char[input.length()];
         inputToCharArray = input.toCharArray();
         for (int i = 0; i < inputToCharArray.length; i++) {
@@ -106,5 +83,6 @@ public class dfa {
             }
         }
     }
+
 
 }

@@ -1,9 +1,9 @@
 /**
  * Created by caroem on 22.04.16.
  */
-public class main {
+public class Main {
     public static void main(String[] args) {
-        dfa dea = new dfa();
+        DFA dea = new DFA();
         dea.addState(0, false, true);
         dea.addState(1, true, false);
         dea.addState(2, false, false);
@@ -24,7 +24,6 @@ public class main {
         dea.addTransition(3, 6, '-');
         dea.addTransition(4, 3, 'e');
         dea.addTransition(6, 5, 'n');
-        dea.input = new String("n.n");
-        dea.acceptInput();
+        dea.acceptInput("nasdas");
     }
 }
