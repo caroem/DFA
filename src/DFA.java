@@ -2,6 +2,7 @@ import java.util.*;
 
 /**
  * Created by caroem on 17.04.16.
+ * Todo: Create createState Method
  */
 public class DFA {
     private List<State> states = new ArrayList<>();
@@ -15,7 +16,7 @@ public class DFA {
     public void addState(int state, boolean isFinal, boolean isInitial) {
         State newState = new State(state, isFinal, isInitial);
         states.add(newState);
-        if(isFinal == true) {
+        if(isFinal) {
             finalStates.add(newState);
         }
     }
@@ -70,7 +71,7 @@ public class DFA {
 
     public void setInitialState() {
         for (int i = 0; i < states.size(); i++) {
-            if (states.get(i).isInitial == true) {
+            if (states.get(i).isInitial) {
                 currentState = states.get(i);
             }
         }

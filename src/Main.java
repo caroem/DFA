@@ -3,6 +3,8 @@
  */
 public class Main {
     public static void main(String[] args) {
+        // The following states and transitions create a DFA which accepts floating point numbers
+        // numbers from 0-9 are represented by n
         DFA dea = new DFA();
         dea.addState(0, false, true);
         dea.addState(1, true, false);
@@ -24,6 +26,6 @@ public class Main {
         dea.addTransition(3, 6, '-');
         dea.addTransition(4, 3, 'e');
         dea.addTransition(6, 5, 'n');
-        dea.acceptInput("nasdas");
+        dea.acceptInput("n.n");
     }
 }
